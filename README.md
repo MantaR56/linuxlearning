@@ -22,3 +22,25 @@ groups 'username'
   -PermitRootLogin no  
   -PasswordAuthentication no  
   -PubkeyAuthentication yes
+
+## Настройка ufw
+### Сначала разрешение ssh, чтобы не закрыть себе доступ к серверу
+**`sudo ufw allow ssh`**
+
+### Главное правило - запретить всё входящее, разрешить всё исходящее
+**`sudo ufw default deny incoming`**  
+**`sudo ufw default allow outgoing`**
+
+### Открытие нужных портов 
+**`sudo ufw allow port/tcp`**
+
+### Включение фаервола и проверка статуса
+**`sudo ufw enable`**  
+**`sudo ufw enable verbose`**  
+### Полезные команды  
+-Посмотреть правила с нумерацией	        sudo ufw status numbered  
+-Удалить правило по номеру (например, 3)	sudo ufw delete 3  
+-Заблокировать порт 25 (почта, спам)	    sudo ufw deny 25/tcp  
+-Запретить IP (заблокировать бота)	      sudo ufw deny from 1.2.3.4  
+-Защита от брутфорса SSH (limit)	        sudo ufw limit ssh (автоматически банит частые попытки)  
+-Выключить фаервол (временно)	            sudo ufw disable
