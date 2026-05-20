@@ -1,42 +1,53 @@
 # Настройка сервера Linux
 ## Добавление пользователей
-**`sudo adduser 'username'`**  
-  
+```bash
+sudo adduser 'username'  
+```  
 ### Добавить в группу sudo  
-**`sudo usermod -aG sudo 'username'`**  
-  
+```bash
+sudo usermod -aG sudo 'username'
+```  
 ### Проверка групп пользователя  
+```bash
 groups 'username'  
-  
+```  
 ## Настройка SSH по ключам  
-**`ssh-keygen -t ed25519`**  
-**`cat ~/.ssh/id_ed25519.pub`**  
-  
+```bash
+ssh-keygen -t ed25519  
+cat ~/.ssh/id_ed25519.pub  
+```  
 ### Установка публичного ключа на сервере  
-**`mkdir -p ~/.ssh`**  
-**`echo "ssh-ed25519 AAAAC3... " >> ~/.ssh/authorized_keys`**  
-**`chmod 600 ~/.ssh/authorized_keys`**  
-  
+```bash
+mkdir -p ~/.ssh  
+echo "ssh-ed25519 AAAAC3... " >> ~/.ssh/authorized_keys  
+chmod 600 ~/.ssh/authorized_keys  
+```
 ## Настройка SSH-сервера для подключения  
-**`sudo nano /etc/ssh/sshd_config`**  
+```bash
+sudo nano /etc/ssh/sshd_config  
   -PermitRootLogin no  
   -PasswordAuthentication no  
   -PubkeyAuthentication yes
-
+```
 ## Настройка ufw
 ### Сначала разрешение ssh, чтобы не закрыть себе доступ к серверу
-**`sudo ufw allow ssh`**
-
+```bash
+sudo ufw allow ssh
+```
 ### Главное правило - запретить всё входящее, разрешить всё исходящее
-**`sudo ufw default deny incoming`**  
-**`sudo ufw default allow outgoing`**
-
+```bash
+sudo ufw default deny incoming  
+sudo ufw default allow outgoing
+```
 ### Открытие нужных портов 
-**`sudo ufw allow port/tcp`**
-
+```bash
+sudo ufw allow port/tcp
+```
 ### Включение фаервола и проверка статуса
-**`sudo ufw enable`**  
-**`sudo ufw enable verbose`**  
+```bash
+sudo ufw enable  
+sudo ufw enable verbose  
+```
 ### Полезные команды  
 | Задача                                  | Команда                                                 |
 | --------------------------------------- | ------------------------------------------------------- |
